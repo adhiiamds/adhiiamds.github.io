@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Selamat Ulang Tahun Syahla</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
+  <style>
+    @keyframes blink {
+      0%, 100% { opacity: 0.2; }
+      50% { opacity: 1; }
+    }
+
+    @keyframes flyUp {
+      0% { transform: translateY(100vh) scale(1); opacity: 1; }
+      100% { transform: translateY(-100vh) scale(1.2); opacity: 0; }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes fadeOut {
+      from { opacity: 1; }
+      to { opacity: 0; }
+    }
+
+    @keyframes loveUp {
+      0% { transform: translateY(100vh) scale(1); opacity: 1; }
+      100% { transform: translateY(-100vh) scale(0.8); opacity: 0; }
+    }
+
+    .fade-in {
+      animation: fadeIn 1s forwards;
+    }
+
+    .fade-out {
+      animation: fadeOut 1s forwards;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: black;
+      font-family: 'Poppins', sans-serif;
+      color: white;
+      overflow: hidden;
+    }
+
+    .stars-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .star {
+      width: 3px;
+      height: 3px;
+      background-color: white;
+      border-radius: 50%;
+      position: absolute;
+      animation: blink 3s infinite;
+    }
+
+    .balloon {
+      position: absolute;
+      bottom: -50px;
+      width: 20px;
+      height: 30px;
+      background-color: pink;
+      border-radius: 50% 50% 50% 50%;
+      animation: flyUp 7s infinite;
+      opacity: 0.8;
+    }
+
+    .love {
+      position: absolute;
+      bottom: -50px;
+      width: 25px;
+      height: 25px;
+      background-color: red;
+      clip-path: polygon(50% 0%, 0% 50%, 50% 100%, 100% 50%);
+      animation: loveUp 5s infinite;
+      opacity: 0.8;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- PAGE 1 -->
+  <div id="intro" style="display:flex;flex-direction:column;justify-content:flex-start;align-items:center;min-height:100vh;text-align:center;position:relative;padding-top:80px;">
+    <div style="position:relative;z-index:1;">
+      <div style="font-size:2.5em;">Hi Syahla</div>
+      <div style="font-size:1.1em;margin:10px 20px 40px;">I really like your name btw</div>
+      <button onclick="showConfirm()" style="font-size:1.2em;padding:15px 30px;background-color:#ffc0cb;color:white;border:none;border-radius:25px;cursor:pointer;">Click Here!!</button>
+    </div>
+    <div id="starsIntro" class="stars-container"></div>
+  </div>
+
+  <!-- PAGE 2 -->
+  <div id="confirmSection" style="display:none;flex-direction:column;justify-content:flex-start;align-items:center;min-height:100vh;text-align:center;position:relative;padding-top:80px;">
+    <div style="position:relative;z-index:1;">
+      <h1 style="font-size:2em;">This is your birthday right?</h1>
+      <button onclick="showBirthday()" style="margin-top:20px;font-size:1.2em;padding:15px 30px;background-color:#ffc0cb;color:white;border:none;border-radius:25px;cursor:pointer;">YESS</button>
+    </div>
+    <div id="starsConfirmSection" class="stars-container"></div>
+  </div>
+
+  <!-- PAGE 3 -->
+  <div id="birthday" style="display:none;flex-direction:column;justify-content:flex-start;align-items:center;min-height:100vh;text-align:center;background:linear-gradient(to bottom right,#ffe6f0,#ffcce0);padding-top:40px;overflow:hidden;position:relative;">
+    <div id="balloons" style="position:absolute;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;"></div>
+    <div id="loves" style="position:absolute;top:0;left:0;width:100%;height:100%;z-index:1;pointer-events:none;"></div>
+
+    <div style="background:#fff0f5;border-radius:15px;padding:25px 18px;box-shadow:0 0 15px pink;width:90%;max-width:250px;min-height:350px;animation:popUp 1s ease-in-out;z-index:1;margin-top:30px;">
+      <h1 style="color:#d63384;">Happy Birthday Syahla!!!</h1>
+      <p style="color:#d63384;">
+        selamat ulang tahun yaa, semoga tahun ini bisa jadi tahun terbaik buat lu la dan juga makin baik ke depannya, thankyou ya laa for everything you do.
+      </p>
+      <p style="color:#d63384;margin-top:15px;">
+        sekali lagi, happy birthday yes!!
+      </p>
+    </div>
+
+    <div style="position:fixed;bottom:10px;left:50%;transform:translateX(-50%);font-size:10px;color:black;z-index:999;">
+      imysm, haha
+    </div>
+  </div>
+
+  <!-- Audio -->
+  <audio id="backgroundMusic" preload="auto">
+    <source src="https://www.dropbox.com/scl/fi/xu3nwm4k4l27410r7u0r5/massobeats-rose-water-royalty-free-lofi-music.mp3?rlkey=06zvw9b6ub1baat7j0m165vqn&raw=1" type="audio/mpeg">
+  </audio>
+
+  <script>
+    function showConfirm() {
+      const intro = document.getElementById('intro');
+      const confirmSection = document.getElementById('confirmSection');
+
+      intro.classList.add('fade-out');
+      setTimeout(() => {
+        intro.style.display = 'none';
+        confirmSection.style.display = 'flex';
+        confirmSection.classList.add('fade-in');
+        generateStars('starsConfirmSection');
+      }, 1000);
+    }
+
+    function showBirthday() {
+      const confirmSection = document.getElementById('confirmSection');
+      const birthday = document.getElementById('birthday');
+
+      confirmSection.classList.add('fade-out');
+      setTimeout(() => {
+        confirmSection.style.display = 'none';
+        birthday.style.display = 'flex';
+        birthday.classList.add('fade-in');
+        document.getElementById('backgroundMusic').play();
+        generateBalloons();
+        generateLoves();
+      }, 1000);
+    }
+
+    function generateStars(containerId) {
+      const starContainer = document.getElementById(containerId);
+      for (let i = 0; i < 100; i++) {
+        const star = document.createElement('div');
+        star.classList.add('star');
+        star.style.top = `${Math.random() * 100}%`;
+        star.style.left = `${Math.random() * 100}%`;
+        star.style.animationDuration = `${Math.random() * 3 + 2}s`;
+        star.style.animationDelay = `${Math.random() * 5}s`;
+        starContainer.appendChild(star);
+      }
+    }
+
+    function generateBalloons() {
+      const balloonContainer = document.getElementById('balloons');
+      const colors = ['#ff69b4', '#ff1493', '#ffc0cb', '#ff85a2'];
+      for (let i = 0; i < 30; i++) {
+        const balloon = document.createElement("div");
+        const size = Math.random() * 20 + 20;
+        const duration = Math.random() * 5 + 5;
+
+        balloon.className = 'balloon';
+        balloon.style.width = `${size}px`;
+        balloon.style.height = `${size * 1.3}px`;
+        balloon.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        balloon.style.left = `${Math.random() * 100}%`;
+        balloon.style.animationDuration = `${duration}s`;
+        balloonContainer.appendChild(balloon);
+      }
+    }
+
+    function generateLoves() {
+      const loveContainer = document.getElementById('loves');
+      for (let i = 0; i < 10; i++) {
+        const love = document.createElement("div");
+        const size = Math.random() * 15 + 20;
+        const duration = Math.random() * 5 + 3;
+
+        love.className = 'love';
+        love.style.width = `${size}px`;
+        love.style.height = `${size}px`;
+        love.style.left = `${Math.random() * 100}%`;
+        love.style.animationDuration = `${duration}s`;
+        loveContainer.appendChild(love);
+      }
+    }
+
+    window.onload = () => {
+      generateStars('starsIntro');
+    }
+  </script>
+</body>
+</html>
